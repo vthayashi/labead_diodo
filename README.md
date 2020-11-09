@@ -22,3 +22,5 @@ Experimento de caracterização de diodo com Arduino Uno, com montagem de voltí
 - Substituir a porta USB na linha "ser = serial.Serial('COM7', baudrate=115200, timeout=10)" do arquivo app.py
 
 - Executar o app.py com o Python 3, e abrir o navegador (e.g. Google Chrome) no endereço "http://127.0.0.1/"
+
+- Para laboratório remoto, usar um programa de acesso remoto (e.g. Anydesk <https://anydesk.com/pt>, acesso remoto do Windows, acesso remoto do Google Chrome)
