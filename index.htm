@@ -1,0 +1,76 @@
+<html>
+	<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+		<script>
+			var camURL;
+			function iniciar(){
+				maxHeight=197;
+  				dbcw=document.body.clientWidth; dbch=document.body.clientHeight;
+  				zoom=dbch/maxHeight; if((dbcw/zoom)<360 ) zoom=dbcw/360;
+  				zoom*=100; zoom=zoom.toFixed(0)+"%";
+				document.body.style.zoom=zoom;
+				sto=setInterval(loadjs,1000);
+			}
+
+			function loadjs(){
+				//ia=vo0.value/5*255; ia++; ia--;
+				client.open('GET', "js?aw=11,"+vo0.value+"&ar=0,1,2,3,4,5", true);
+				client.send();
+			}
+
+			var client=new XMLHttpRequest();
+			client.onreadystatechange=function(){
+				if((this.readyState==4) && (this.status==200)){
+					myObj=JSON.parse(this.responseText);
+					if(typeof myObj.ar!='undefined'){
+						v0=myObj.ar[0]*10/1023;
+						v1=myObj.ar[1]*10/1023;
+						vi0.value=v0.toFixed(2)+"V";
+						vi1.value=v1.toFixed(2)+"V";
+					}
+				}
+			}
+		</script>
+		<style>
+			td{text-align:center;}
+			input[type=text]{height:42px;background:black;text-align:center;width:160px;font:bold 30px Arial;color:red;border:solid 1px silver;border-radius:6px;}
+		</style>
+	</head>
+	<body onload="iniciar();" style="margin:6px 0 0 0">
+		<div align=center>
+		
+			<div id=div01></div>
+		
+			<div style="border:solid 1px silver;border-radius:6px;width:340px;">
+				<table border=0 cellspacing=0>
+					<tr><td colspan=11 style="color:gray;"><b>Fonte de Tensão</b></td></tr>
+					<tr><td colspan=11><input id="vi0" type="text" value="0.00V"></td></tr>
+					<tr><td colspan=11 style="margin-bottom:0;">
+						<input type="range" id="vo0" min="0" max="255" step="1" value="0"
+							style="width:280px;">
+					</td></tr>
+					<tr>
+						<script>
+							for(i=0;i<=10;i++){ document.write("<td width=20>"+i+"</td>"); }
+						</script>
+					</tr>
+				</table>
+			</div>
+
+			<div style="height:8px;"></div>
+	  
+			<div style="border:solid 1px silver;border-radius:6px;width:340px;">
+				<table border=0 cellspacing=0>
+					<tr><td colspan=6 style="width:240px;color:gray;"><b>Voltímetro</b></td></tr>
+					<tr><td colspan=6 style="padding-bottom:4px;">
+						<input id="vi1" type="text" value="0.00V"></td></tr>
+				</table>
+			</div>
+		
+			<!--div style="height:6px;"></div>
+	  
+			<img id="img01" src="" width="340" style="margin-top:3px;border-radius:4px;cursor:hand;background-color: silver;"-->
+
+		</div>
+	</body>
+</html>
